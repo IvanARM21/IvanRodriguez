@@ -3,7 +3,7 @@ import { Alert } from '@/components';
 import { isValidEmail } from "@/utils";
 import { useContactStore } from "@/store/contact-store";
 import clsx from 'clsx';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const ContactForm = () => {
 
@@ -37,7 +37,7 @@ export const ContactForm = () => {
             <div className="flex flex-col gap-2 ">
                 <label 
                     htmlFor="name" 
-                    className="text-lg sm:text-xl"
+                    className="text-xl"
                 >Name</label>
                 <input 
                     type="text" 
@@ -56,7 +56,7 @@ export const ContactForm = () => {
             <div className="flex flex-col gap-2 ">
                 <label 
                     htmlFor="email" 
-                    className="text-lg sm:text-xl"
+                    className="text-xl"
                 >Email</label>
                 <input 
                     type="text" 
@@ -80,7 +80,7 @@ export const ContactForm = () => {
         <div className="flex flex-col gap-2 mt-3">
             <label 
                 htmlFor="subject" 
-                className="text-lg sm:text-xl"
+                className="text-xl"
             >Subject</label>
             <input 
                 type="text" 
@@ -102,7 +102,7 @@ export const ContactForm = () => {
         <div className="flex flex-col gap-2 mt-3">
             <label 
                 htmlFor="message" 
-                className="text-lg sm:text-xl"
+                className="text-xl"
             >
                 Message
             </label>

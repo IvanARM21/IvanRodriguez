@@ -10,12 +10,12 @@ export const UsignVar = () => {
         
     return (
         <>
-            <p className="text-slate-400 mt-5 text-nowrap sm:text-xl">
+            <p className="text-slate-400 mt-5 text-nowrap text-xl">
                 {
                     `// Then we can use the variable and print the value`
                 }
             </p>
-            <p className="font-bold text-nowrap sm:text-xl">
+            <p className="font-bold text-nowrap text-xl">
                 {isConsole ? (
                     <>
                         <span className="text-gray-300">console.</span>

@@ -12,7 +12,7 @@ export const ButtonViewDetails = ({id} : Props) => {
   const router = useRouter();
 
   const openModal = () => {
-    router.push(`${pathname}?viewProject=${id}`, {
+    router.replace(`${pathname}?viewProject=${id}`, {
       scroll: false
     });
   }

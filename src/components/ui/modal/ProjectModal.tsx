@@ -6,8 +6,18 @@ import { projects } from "@/data";
 import { formattProject } from "@/utils";
 import Image from "next/image";
 import clsx from "clsx";
-import { useEffect, useMemo, useState } from "react";
+import {  useEffect, useRef, useState } from "react";
+import { ProjectFormatted } from "@/interfaces";
 
+const initialValues = {
+    id: null,
+    title: "",
+    image: "",
+    url: "",
+    status: false,
+    description: "",
+    technologies: [],
+ }
 export const ProjectModal = () => {
 
     const searchParams = useSearchParams();
@@ -15,41 +25,39 @@ export const ProjectModal = () => {
     const pathname = usePathname();
     const params = new URLSearchParams(searchParams);
 
-    const [isActive, setIsActive] = useState(false);
+    const isActive = useRef(false);
+    const [project, setProject] = useState<ProjectFormatted>(initialValues);
 
-    const projectId = Number(params.get("viewProject")) || 0;
-
-    useEffect(() => {
-        setIsActive(params.has("viewProject"));
-        if(params.has("viewProject")) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            if(!project) {
-                router.push(pathname, { scroll: false });
-                document.body.style.overflow = 'auto';
-            }
-        }
-    }, [params.has("viewProject")]);
- 
-    const project = projects.find(projectData => projectData.id === projectId);
-
-    const projectTechnologies = formattProject(project);
-
-    
+    const projectId = Number(params.get("viewProject")) || null;
 
     const closeModal = () => {
-        setIsActive(false);
+        isActive.current = false;
         document.body.style.overflow = 'auto';
         setTimeout(() => {
-            router.push(pathname, {
-                scroll: false
-            });
+            router.push(pathname, { scroll: false });
         }, 300);
     }
 
+    
+
+    useEffect(() => {
+        const closeModalFn = () => {
+            isActive.current = false;
+            router.push(pathname, { scroll: false });
+        }
+        if(projectId === null) return closeModalFn();
+        const currentProject = projects.find(project => project.id === projectId);
+        if(!currentProject?.id) return closeModalFn();
+        setProject({
+            ...currentProject,
+            technologies: formattProject(currentProject)
+        });
+        isActive.current = false;
+    }, [projectId, router, pathname]);    
+
   return (
     <>
-        {isActive && <div 
+        {isActive.current && <div 
             className="fade-in fixed inset-0 bg-indigo-600 backdrop-blur-sm bg-opacity-10 z-30 transition-all duration-500 cursor-pointer"
             onClick={closeModal}
         />  }
@@ -60,7 +68,7 @@ export const ProjectModal = () => {
                 "show-modal": isActive
             }
         )}>
-            {project && (
+            {project.title && (
                 <div className="bg-slate-950 w-full rounded-xl py-6 px-4 sm:p-10 relative flex flex-col items-center lg:flex-row gap-5 overflow-y-auto">
                     <FaTimesCircle 
                         onClick={closeModal}
@@ -81,7 +89,7 @@ export const ProjectModal = () => {
                             </div>
                             <div className="flex gap-5 ">
                                 {
-                                    projectTechnologies.map(technologie => (
+                                    project.technologies.map(technologie => (
                                         <technologie.icon key={technologie.id} className={`${technologie.color} h-8 w-8 sm:h-12 sm:w-12 `}/>
                                     ))
                                 }

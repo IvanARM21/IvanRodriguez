@@ -1,8 +1,7 @@
 import { Poppins } from "next/font/google";
-import "./globals.css";
 import { authMiddleware } from "@/actions";
 import { SessionProvider } from "@/components";
-
+import "./globals.css";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700", "900"] });
 

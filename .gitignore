@@ -4,6 +4,8 @@
 
 /postgres/
 /src/seed/
+/prisma/
+/src/actions/
 
 # dependencies
 /node_modules

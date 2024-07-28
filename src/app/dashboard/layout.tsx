@@ -1,5 +1,5 @@
 import { authMiddleware } from "@/actions";
-import { DashboardHeader, Header, MenuMobile, SidebarDashboard } from "@/components";
+import { DashboardHeader, SidebarDashboard } from "@/components";
 import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
@@ -18,8 +18,7 @@ export default async function DashboardLayout({
     <>
         <DashboardHeader />
         <SidebarDashboard />
-
-        <main className="lg:ml-80 px-2 sm:px-10 gap-1 py-4">
+        <main className="lg:ml-80 px-2 sm:px-10 gap-1 py-4 max-w-screen-xl">
           {children}
         </main>
     </>

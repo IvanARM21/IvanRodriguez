@@ -13,7 +13,7 @@ export const SidebarButton = () => {
     <button
         type="button"
         onClick={isActive ? hiddenMenuDashboard : showMenuDashboard}
-        className="h-7 w-7 text-slate-100 cursor-pointer"
+        className="h-7 w-7 text-slate-100 cursor-pointer lg:hidden"
     >
         <FaBars 
             size={30}

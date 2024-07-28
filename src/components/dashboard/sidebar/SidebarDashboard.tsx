@@ -8,30 +8,12 @@ import Link from "next/link"
 import { useEffect, useState } from "react";
 import { FaEnvelope, FaFolderOpen } from "react-icons/fa"
 import { FaHouse } from "react-icons/fa6"
+import { MdClose } from "react-icons/md";
 
 export const SidebarDashboard = () => {
 
   const isActive = useDashboardStore(state => state.isActive);
   const hiddenMenu = useDashboardStore(state => state.hiddenMenuDashboard);
-
-  const [width, setWidth] = useState<number | null>(null);
-
-  useEffect(() => {
-    if(typeof window !== undefined) {
-      setWidth(window.innerWidth);
-      // Function handler the resize
-      const handleResize = () => setWidth(window.innerWidth);
-      // Event Listener - resize
-      window.addEventListener('resize', handleResize);
-      // Clear Event Listener
-      return () => window.removeEventListener('resize', handleResize);
-    }
-  }, []);
-
-  if (width === null) {
-    // Optionally return null or a loading state if width is not set
-    return null;
-  }
 
   return (
     <>
@@ -41,34 +23,44 @@ export const SidebarDashboard = () => {
             className="fade-in inset-0 z-20 bg-indigo-600 fixed bg-opacity-10 backdrop-blur-sm transition-all duration-300 block lg:hidden"
           />
         )}
-        
 
         <nav 
           className={clsx(
-            "bg-slate-950 border-r-2 border-slate-800  max-w-[320px] w-full h-screen fixed z-30 flex flex-col justify-between left-0 gap-4 overflow-hidden transform transition-all duration-300", 
+            "bg-slate-950 border-r-2 border-slate-800 flex flex-col max-w-[280px] w-full h-full max-h-screen fixed z-30 justify-between left-0 gap-4 overflow-hidden lg:translate-x-0 transform transition-all duration-300", 
             {
-              "lg:translate-x-0": width >= 1024 && isActive,
-              "lg:-translate-x-full": width >= 1024 && isActive,
-              "translate-x-0": width <= 1024 && isActive,
-              "-translate-x-full": width <= 1024 && !isActive
+              "translate-x-0": isActive,
+              "-translate-x-full": !isActive
             }
           )}
         >
-          <div className="flex flex-col">
-            <div className="h-20 flex justify-center items-center mb-10">
-              <HeaderLogo 
-                fontSize="text-3xl"
+          <div className="h-20 flex justify-between items-center  mb-3">
+            <HeaderLogo 
+              fontSize="text-2xl"
+            />
+            <button
+              type="button"
+              onClick={hiddenMenu}
+            >
+              <MdClose 
+                className=" text-white cursor-pointer h-10 w-10" 
               />
-            </div>
+            </button>
+          </div>
+
+          <div className="h-[1px] w-full bg-slate-700" />
+
+          <div className="flex-1">
             <Link
+              onClick={hiddenMenu}
               href="/dashboard"
-              className="flex gap-4 text-xl font-bold items-center p-4 text-indigo-600 mb-2 transition-all duration-300 hover:text-white hover:bg-indigo-600"
+              className="flex gap-4 text-xl font-bold items-center p-4 text-indigo-600 mb-2 transition-all duration-300 hover:text-white hover:bg-indigo-600 mt-3"
             >
               <FaHouse size={24}/>
               Home
             </Link>
 
             <Link
+              onClick={hiddenMenu}
               href="/dashboard/projects"
               className="flex gap-4 text-xl font-bold items-center p-4 text-indigo-600 my-2 transition-all duration-300 hover:text-white hover:bg-indigo-600"
             >
@@ -77,16 +69,19 @@ export const SidebarDashboard = () => {
             </Link>
 
             <Link
+              onClick={hiddenMenu}
               href="/dashboard/projects"
-              className="flex gap-4 text-xl font-bold items-center p-4 text-indigo-600 my-2 transition-all duration-300 hover:text-white hover:bg-indigo-600"
+              className="flex gap-4 text-xl font-bold items-center p-4 text-indigo-600 my-2 transition-all duration-300 hover:text-white hover:bg-indigo-600 mb-3"
             >
               <FaEnvelope size={24}/>
               Messages
             </Link>
           </div>
-          <AuthMenuMobile
-            isDashboard={true}
-          />
+
+          <div className="h-[1px] w-full bg-slate-700" />
+
+          <AuthMenuMobile />
+          
       </nav>
     </>
   )

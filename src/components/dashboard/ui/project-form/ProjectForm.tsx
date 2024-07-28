@@ -4,7 +4,6 @@ import { useState } from "react";
 import { technologies } from "@/data";
 import { ProjectDraft } from "@/interfaces";
 import { Alert } from "@/components";
-import { FiUpload } from "react-icons/fi";
 import { ImageInput } from "./ImageInput";
 
 interface Props {
@@ -75,17 +74,15 @@ export const ProjectForm = ({project = null} : Props) => {
         const formData = new FormData();
     }
 
-    console.log(projectForm)
-
   return (
     <form 
         onSubmit={onSubmit}
-        className="mt-1 w-full lg:w-10/12 2xl:w-7/12 flex flex-col gap-2 bg-slate-900 px-3 py-5 sm:px-8 sm:py-10 rounded-xl mx-auto"
+        className="mt-1 w-full lg:w-10/12 2xl:w-8/12 flex flex-col gap-2 bg-slate-900 px-6 py-8 sm:px-8 sm:py-10 rounded-xl mx-auto"
     >
         <div className="flex flex-col gap-2">
             <label 
                 htmlFor="title"
-                className="text-lg sm:text-xl font-bold"
+                className="text-lg sm:text-xl"
             >Name</label>
             <input 
                 value={projectForm.title}
@@ -107,7 +104,7 @@ export const ProjectForm = ({project = null} : Props) => {
         <div className="flex flex-col gap-2 mt-3">
             <label 
                 htmlFor="url"
-                className="text-lg sm:text-xl font-bold"
+                className="text-lg sm:text-xl"
             >Link</label>
             <input 
                 value={projectForm.url}
@@ -127,7 +124,7 @@ export const ProjectForm = ({project = null} : Props) => {
         </div>
 
         <div className="flex flex-col gap-2 mt-3">
-            <label htmlFor="description" className="text-lg sm:text-xl font-bold">
+            <label htmlFor="description" className="text-lg sm:text-xl">
                 Description
             </label>
             <textarea 
@@ -150,7 +147,7 @@ export const ProjectForm = ({project = null} : Props) => {
         <div className="flex flex-col gap-2 mt-3">
             <label 
                 htmlFor="status"
-                className="text-lg sm:text-xl font-bold"
+                className="text-lg sm:text-xl"
             >Status</label>
             <div className="flex flex-wrap gap-2">
                 {statusOptions.map(option => (
@@ -179,7 +176,7 @@ export const ProjectForm = ({project = null} : Props) => {
 
         <div className="flex flex-col gap-2 mt-3">
             <p 
-                className="text-lg sm:text-xl font-bold"
+                className="text-lg sm:text-xl"
             >Technologies</p>
             <div className="flex flex-wrap gap-3">
                 {technologies.map(technology => (

@@ -18,7 +18,7 @@ export const SessionProvider = ({children, user} : Props) => {
 
   return (
     <>
-    {children}
+      {children}
     </>
   )
 }

@@ -3,6 +3,7 @@ import { navItems } from '@/data'
 import { MenuButton } from './MenuButton'
 import { HeaderLogo } from './HeaderLogo'
 import { AuthMenu } from './AuthMenu'
+import { DashboardMenu } from './DashboardMenu'
 
 
 export const Header = () => {
@@ -16,6 +17,8 @@ export const Header = () => {
                 />
 
                 <nav className="gap-3 hidden md:flex">
+                    <DashboardMenu />
+                    
                     {navItems.map(item => (
                         <Link 
                             key={item.url}
