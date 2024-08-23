@@ -1,12 +1,14 @@
-# Descripción
+# Description English
+## Run in development
 
-## Correr en Dev
+1. Clonate the respository
+2. Install dependencies ```npm install```
+3. Run the project ```npm run dev```
+
+
+# Descripción Español
+## Correr en desarollo
 
 1. Clonar el repositorio
-2. Crear una copia del ```.env.template``` y renombrarlo a ```.env``` y cambiar las variables de entorno
-3. Instalar dependencias ```npm install```
-4. Levantar la base de datos ```docker compose up -d```
-5. Correr el proyecto ```npm run dev```
-
-
-## Correr en prod
+2. Instalar dependencias ```npm install```
+3. Correr el proyecto ```npm run dev```

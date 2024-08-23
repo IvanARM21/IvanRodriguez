@@ -1,13 +1,14 @@
 "use client";
 
+import {  useEffect, useState } from "react";
+import Image from "next/image";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import clsx from "clsx";
 import { FaTimesCircle } from "react-icons/fa";
 import { projects } from "@/data";
 import { formattProject } from "@/utils";
-import Image from "next/image";
-import clsx from "clsx";
-import {  useEffect, useRef, useState } from "react";
-import { ProjectFormatted } from "@/interfaces";
+import { Lang, ProjectFormatted } from "@/interfaces";
+import { modalLang } from "@/lang";
 
 const initialValues = {
     id: null,
@@ -15,7 +16,10 @@ const initialValues = {
     image: "",
     url: "",
     status: false,
-    description: "",
+    description: {
+        es: "",
+        us: ""
+    },
     technologies: [],
  }
 export const ProjectModal = () => {
@@ -23,44 +27,39 @@ export const ProjectModal = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
+    
     const params = new URLSearchParams(searchParams);
-
-    const isActive = useRef(false);
+    const [isActive, setIsActive] = useState(false);
     const [project, setProject] = useState<ProjectFormatted>(initialValues);
 
     const projectId = Number(params.get("viewProject")) || null;
+    const lang = params.get("lang") as Lang ?? "us";
 
     const closeModal = () => {
-        isActive.current = false;
+        setIsActive(false);
         document.body.style.overflow = 'auto';
-        setTimeout(() => {
-            router.push(pathname, { scroll: false });
-        }, 300);
+        router.push(`${pathname}?lang=${lang}`, { scroll: false });
     }
-
-    
-
     useEffect(() => {
         const closeModalFn = () => {
-            isActive.current = false;
-            router.push(pathname, { scroll: false });
+            closeModal();
+            setTimeout(() => setProject(initialValues), 400);
         }
         if(projectId === null) return closeModalFn();
         const currentProject = projects.find(project => project.id === projectId);
         if(!currentProject?.id) return closeModalFn();
-        setProject({
-            ...currentProject,
-            technologies: formattProject(currentProject)
-        });
-        isActive.current = false;
-    }, [projectId, router, pathname]);    
+        setProject({ ...currentProject, technologies: formattProject(currentProject) });
+        setIsActive(true);
+    }, [projectId]);    
 
   return (
     <>
-        {isActive.current && <div 
-            className="fade-in fixed inset-0 bg-indigo-600 backdrop-blur-sm bg-opacity-10 z-30 transition-all duration-500 cursor-pointer"
-            onClick={closeModal}
-        />  }
+        {isActive && 
+            <div 
+                className={"fade-in fixed inset-0 bg-indigo-600 backdrop-blur-sm bg-opacity-10 z-30 transition-all duration-500 cursor-pointer"}
+                onClick={closeModal}
+            />  
+        }
         <div className={clsx(
             "fixed top-1/2 left-1/2 z-40 -translate-x-1/2 -translate-y-1/2 -tra max-w-7xl w-full px-2 transition-all duration-300 max-h-[80vh] overflow-y-auto",
             {
@@ -75,8 +74,8 @@ export const ProjectModal = () => {
                         className="absolute right-4 top-4 text-red-600 h-7 w-7 cursor-pointer"
                     />
                     <Image 
-                        width={600}
-                        height={600}
+                        width={400}
+                        height={400}
                         src={project.image}
                         alt={project.title}
                         className="rounded-md w-full max-w-[600px] mt-10 lg:mt-0"
@@ -85,7 +84,7 @@ export const ProjectModal = () => {
                         <div className="flex-1 flex flex-col gap-5 mb-6">
                             <div>
                                 <h3 className="font-bold text-3xl sm:text-4xl">{project.title}</h3>
-                                <p className="sm:text-xl mt-3">{project.description}</p>
+                                <p className="sm:text-xl mt-3">{project.description[lang]}</p>
                             </div>
                             <div className="flex gap-5 ">
                                 {
@@ -96,7 +95,7 @@ export const ProjectModal = () => {
                             </div>
                         </div>
                         <a href={project.url} className="btn-primary w-fit ml-auto px-4 py-3">
-                            View Project
+                            {modalLang[lang].viewProject}
                         </a>
                     </div>
                 </div>

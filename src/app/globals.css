@@ -11,6 +11,13 @@
   100% {opacity: 1;}
 }
 
+html {
+  scroll-behavior: smooth;
+}
+.sidebar-width {
+  width: calc(100% - 20px);
+}
+
 .fade-in {
   -webkit-animation-duration: 500ms;
   animation-duration: 500ms;

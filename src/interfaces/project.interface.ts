@@ -6,7 +6,10 @@ export interface Project {
     image: string;
     url?: string;
     status: boolean
-    description: string;
+    description: {
+        es: string;
+        us: string;
+    };
     technologies: number[];
 }
 
@@ -16,16 +19,16 @@ export interface ProjectFormatted {
     image: string;
     url?: string;
     status: boolean
-    description: string;
+    description: Project["description"];
     technologies: Technology[];
 }
 
 export interface ProjectDraft {
-    id: number | null;
+    id?: number;
     title: string;
     image: string | File;
     url?: string;
     status: boolean
-    description: string;
+    description: Project["description"];
     technologies: number[];
 }

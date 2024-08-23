@@ -1,28 +1,50 @@
 import { ContactSection, Section, TechnologiesGrid, AboutMeSection, ProjectGrid } from "@/components";
-
+import { Lang } from "@/interfaces";
+import { projectsLang, stackLang } from "@/lang";
+import { existsLang } from "@/utils";
+import { redirect } from "next/navigation";
 
 export const metadata = {
  title: '<IvanRodriguez/> | Home',
 };
 
-export default function Home() {
+
+interface Props {
+  searchParams: {
+    lang: string | null;
+  }
+}
+
+export default function Home({searchParams} : Props) {
+  
+  if(!existsLang(searchParams.lang)) redirect("/?lang=us");
+  const lang = searchParams.lang as Lang;
+
   return (
     <>
-      <AboutMeSection />
+      <AboutMeSection 
+        lang={lang}
+      />
       
       <Section
-        title='Projects'
+        id="projects"
+        title={projectsLang[lang].projectsTag ?? projectsLang["us"].projectsTag}
       >
-        <ProjectGrid />
+        <ProjectGrid 
+          lang={lang}
+        />
       </Section>
 
       <Section
-        title='Stack'
+        id="stack"
+        title={stackLang[lang].stackTag ?? stackLang["us"].stackTag}
       >
         <TechnologiesGrid />
       </Section>
       
-      <ContactSection />
+      <ContactSection 
+        lang={lang}
+      />
     </>
   );
 }

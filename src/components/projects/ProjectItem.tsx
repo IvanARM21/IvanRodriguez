@@ -1,16 +1,18 @@
 import Image from "next/image";
-import { Project } from '@/interfaces/project.interface'
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { Project } from '@/interfaces'
+import { Lang } from "@/interfaces";
+import { formattProject } from "@/utils";
 import { ButtonViewDetails } from "./ButtonViewDetails";
-import { formattProject } from "@/utils/formattProject";
 
 interface Props {
-    project: Project
+    project: Project;
+    lang: Lang;
 }
 
-export const ProjectItem = ({project} : Props) => {
+export const ProjectItem = ({project, lang} : Props) => {
 
-    const projectTechnologies = formattProject(project);
+  const projectTechnologies = formattProject(project);
 
   return (
     <article className="flex flex-col overflow-hidden bg-slate-900 bg-opacity-30  p-3 rounded-lg">
@@ -23,8 +25,9 @@ export const ProjectItem = ({project} : Props) => {
             <Image 
                 src={project.image}
                 alt="Ensemble"
-                height={600}
-                width={600}
+                height={300}
+                width={300}
+                quality={60}
                 className="w-full hover:scale-125 transition-all duration-500 cursor-pointer"
             />
         </a>
@@ -52,7 +55,10 @@ export const ProjectItem = ({project} : Props) => {
                 ><FaExternalLinkAlt className="h-6 w-6 " /></a>
             </div>
             
-            <ButtonViewDetails id={project.id}/>
+            <ButtonViewDetails 
+                lang={lang}
+                id={project.id}
+            />
         </div>
     </article>
   )

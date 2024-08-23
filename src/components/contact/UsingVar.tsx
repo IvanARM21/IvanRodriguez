@@ -1,19 +1,22 @@
 "use client";
 
+import { Lang } from "@/interfaces";
+import { contactLang } from "@/lang";
 import { useContactStore } from "@/store/contact-store";
+import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 
 export const UsignVar = () => {
 
+    const params = useSearchParams();
+    const lang = params.get("lang") as Lang ?? "us";
     const type = useContactStore(state => state.type);
     const isConsole = useMemo(() => type === "console", [type]);
         
     return (
         <>
             <p className="text-slate-400 mt-5 text-nowrap text-xl">
-                {
-                    `// Then we can use the variable and print the value`
-                }
+                // {contactLang[lang].secondComment}
             </p>
             <p className="font-bold text-nowrap text-xl">
                 {isConsole ? (
@@ -25,9 +28,9 @@ export const UsignVar = () => {
                     <span className="text-amber-300">alert</span>
                 )}
                 <span className="text-fuchsia-600">{"("}</span>
-                <span className="text-emerald-500">{'"Email of contact: "'}</span>
+                <span className="text-emerald-500">{`"${contactLang[lang].consoleText} "`}</span>
                 <span className="text-indigo-500">{" "} + {" "}</span>
-                <span className="text-gray-300">myEmail</span>
+                <span className="text-gray-300">{contactLang[lang].varMyEmail}</span>
                 <span className="text-fuchsia-600">{")"}</span>
                 <span>;</span>
             </p>

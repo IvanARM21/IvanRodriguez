@@ -4,12 +4,16 @@ import { TitleSection } from './TitleSection';
 interface Props {
     children: React.ReactNode;
     title: string;
+    id: string;
 }
 
-export const Section = ({children, title} : Props) => {
+export const Section = ({children, title, id} : Props) => {
 
   return (
-    <section className={`fade-in my-20`}>
+    <section 
+      id={id}
+      className={`fade-in my-20`}
+    >
         <TitleSection title={title} />
         {children}
     </section>

@@ -1,9 +1,7 @@
-import { Poppins } from "next/font/google";
-import { authMiddleware } from "@/actions";
-import { SessionProvider } from "@/components";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700", "900"] });
+const outfit = Outfit({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
 export default async function RootLayout({
   children,
@@ -11,14 +9,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const isAuth = await authMiddleware();
 
   return (
     <html lang="en">
-      <body className={`${poppins.className} bg-slate-950 text-gray-300 min-h-screen flex flex-col`}>
-        <SessionProvider user={isAuth.user}>
+      <body className={`${outfit.className} bg-slate-950 text-gray-300 min-h-screen flex flex-col`}>
           {children}
-        </SessionProvider>
       </body>
     </html>
   );

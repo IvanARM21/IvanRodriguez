@@ -1,11 +1,15 @@
 "use client";
 
+import { Lang } from "@/interfaces";
 import { useContactStore } from "@/store/contact-store";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export const PrintEmail = () => {
 
-    const message = "Email of contact: ";
+    const params = useSearchParams();
+    const lang = params.get("lang") as Lang ?? "us";
+    const message = lang === "us" ? "Email of contact: " : "Email de contacto: ";
     const myEmail = "ivanrms371@gmail.com";
 
 

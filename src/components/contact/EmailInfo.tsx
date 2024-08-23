@@ -1,17 +1,23 @@
+import { Lang } from '@/interfaces';
 import { UsignVar } from './UsingVar';
 import { TestButton } from './TestButton';
 import { ChangeTypeButton } from './ChangeTypeButton';
 import { SocialNetworks } from '../ui/social-networks/SocialNetworks';
+import { contactLang } from '@/lang';
 
-export const EmailInfo = () => {
+interface Props {
+  lang: Lang;
+}
+
+export const EmailInfo = ({lang} : Props) => {
   return (
     <div className="flex flex-col justify-between gap-8 w-full min-[992px]:w-6/12">
-      <div className="bg-slate-900 rounded-lg px-4 py-4 sm:py-6 overflow-auto scrollbar">
+      <div className="bg-slate-900 rounded-2xl px-4 py-4 sm:py-6 overflow-auto scrollbar">
         <ChangeTypeButton />
-        <p className="text-slate-400 text-nowrap text-xl">{"// First we declare the variable"}</p>
+        <p className="text-slate-400 text-nowrap text-xl">// {contactLang[lang].firstComment}</p>
         <p className="text-indigo-500 font-bold text-xl text-nowrap">
           <span>const</span> {" "}
-          <span className="text-gray-300">myEmail</span>
+          <span className="text-gray-300">{contactLang[lang].varMyEmail}</span>
           <span>{" "} = {" "}</span>
           <span className="text-emerald-500">&quot;ivanrms371@gmail.com&quot;</span>
           <span className="text-gray-300">;</span>

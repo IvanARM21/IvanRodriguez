@@ -2,16 +2,17 @@ import { Footer, Header, MenuMobile } from "@/components";
 import { ProjectModal } from "@/components/ui/modal/ProjectModal";
 
 export const metadata  = {
-    title: '<IvanRodriguez/> | Layout',
-    description: "Iván - Full Stack Web Developer specialized in frontend. Explore my portfolio to see modern and efficient projects using technologies like HTML, CSS, JavaScript, React, Next.js and more.",
-   };
+  title: '<IvanRodriguez/> | Layout',
+  description: "Iván - Full Stack Web Developer specialized in frontend. Explore my portfolio to see modern and efficient projects using technologies like HTML, CSS, JavaScript, React, Next.js and more.",
+};
+
+interface Props {
+  children: React.ReactNode
+}
 
 export default async function AppLayout({
  children
-}: {
- children: React.ReactNode;
-}) {
-
+}: Props ) {
   return (
     <>
         <Header />

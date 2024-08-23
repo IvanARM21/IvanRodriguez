@@ -1,18 +1,21 @@
 "use client";
 
+import { Lang } from "@/interfaces";
+import { projectsLang } from "@/lang";
 import { useRouter, usePathname } from "next/navigation";
 
 interface Props {
   id: number | null;
+  lang: Lang
 }
 
-export const ButtonViewDetails = ({id} : Props) => {
+export const ButtonViewDetails = ({id, lang} : Props) => {
 
   const pathname = usePathname();
   const router = useRouter();
 
   const openModal = () => {
-    router.replace(`${pathname}?viewProject=${id}`, {
+    router.replace(`${pathname}?lang=${lang ?? "us"}&viewProject=${id}`, {
       scroll: false
     });
   }
@@ -22,6 +25,6 @@ export const ButtonViewDetails = ({id} : Props) => {
         type="button"
         onClick={openModal} 
         className="btn-primary w-full p-3 my-5"
-    >View Details</button>
+    >{projectsLang[lang].projectButton ?? projectsLang["us"].projectButton}</button>
   )
 }

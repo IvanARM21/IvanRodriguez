@@ -1,11 +1,17 @@
 "use client";
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import clsx from 'clsx';
+import { Lang } from '@/interfaces';
 import { Alert } from '@/components';
 import { isValidEmail } from "@/utils";
-import { useContactStore } from "@/store/contact-store";
-import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { contactLang } from '@/lang';
+import { useContactStore } from "@/store";
 
 export const ContactForm = () => {
+
+  const params = useSearchParams();
+  const lang = params.get("lang") as Lang ?? "us";
 
   const { formData, isHovered, onChange, onBlur, onSubmit, isSubmit, isLoading } = useContactStore();
 
@@ -20,7 +26,7 @@ export const ContactForm = () => {
   }, [isSubmit]);
 
   return (
-    <form onSubmit={onSubmit} className="bg-slate-900 px-6 py-8 rounded-lg w-full min-[992px]:w-6/12">
+    <form onSubmit={onSubmit} className="bg-slate-900 px-6 py-8 rounded-2xl w-full min-[992px]:w-6/12">
         {isVisible && (
             <Alert 
                 isError={false}
@@ -38,38 +44,38 @@ export const ContactForm = () => {
                 <label 
                     htmlFor="name" 
                     className="text-xl"
-                >Name</label>
+                >{contactLang[lang].nameLabel}</label>
                 <input 
                     type="text" 
                     id="name"
-                    placeholder="Your Name"
-                    className="bg-slate-800 p-3 rounded-md"
+                    placeholder={contactLang[lang].namePlaceholder}
+                    className="bg-slate-800 p-3 rounded-xl"
                     onChange={onChange}
                     onBlur={onBlur}
                     value={formData.name}
                 />
                 { isHovered.name && formData.name === "" && <Alert 
                         isError={true}
-                        message="The name cannot be empty"
+                        message={contactLang[lang].nameAlert}
                 /> }
             </div>
             <div className="flex flex-col gap-2 ">
                 <label 
                     htmlFor="email" 
                     className="text-xl"
-                >Email</label>
+                >{contactLang[lang].emailLabel}</label>
                 <input 
                     type="text" 
                     id="email"
-                    placeholder="Your Email"
-                    className="bg-slate-800 p-3 rounded-md"
+                    placeholder={contactLang[lang].emailPlaceholder}
+                    className="bg-slate-800 p-3 rounded-xl"
                     onChange={onChange}
                     onBlur={onBlur}
                     value={formData.email}
                 />
                 { isHovered.email && formData.email === "" && <Alert 
                         isError={true}
-                        message="The email cannot be empty"
+                        message={contactLang[lang].emailAlert}
                 /> }
                 { !isValidEmail(formData.email) && formData.email.length > 0 && <Alert 
                         isError={true}
@@ -81,12 +87,12 @@ export const ContactForm = () => {
             <label 
                 htmlFor="subject" 
                 className="text-xl"
-            >Subject</label>
+            >{contactLang[lang].subjectLabel}</label>
             <input 
                 type="text" 
                 id="subject"
-                placeholder="The Subject"
-                className="bg-slate-800 p-3 rounded-md"
+                placeholder={contactLang[lang].subjectPlaceholder}
+                className="bg-slate-800 p-3 rounded-xl"
                 onChange={onChange}
                 onBlur={onBlur}
                 value={formData.subject}
@@ -94,7 +100,7 @@ export const ContactForm = () => {
             {
                 isHovered.subject && formData.subject === "" && <Alert 
                     isError={true}
-                    message="The subject cannot be empty"
+                    message={contactLang[lang].subjectAlert}
                 />
             }
         </div>
@@ -104,25 +110,21 @@ export const ContactForm = () => {
                 htmlFor="message" 
                 className="text-xl"
             >
-                Message
+                {contactLang[lang].messageLabel}
             </label>
             <textarea 
                 name="message" 
                 id="message"
-                placeholder="Your Message"
+                placeholder={contactLang[lang].messagePlaceholder}
                 rows={3}
-                className="bg-slate-800 p-3 rounded-md resize-none"
+                className="bg-slate-800 p-3 rounded-xl resize-none"
                 onChange={onChange}
                 onBlur={onBlur}
                 value={formData.message}
             ></textarea>
             { isHovered.message && formData.message === "" && <Alert 
                     isError={true}
-                    message="The message cannot be empty"
-             /> }
-             {formData.message.length > 0 && formData.message.length < 25 && <Alert 
-                    isError={true}
-                    message="The length of message must be longer than twenty-five"
+                    message={contactLang[lang].messageAlert}
              /> }
         </div>
 
@@ -139,7 +141,7 @@ export const ContactForm = () => {
                 type="submit"
                 className="btn-primary px-4 py-3 cursor-pointer w-full"
                 disabled={isLoading}
-                value={!isLoading ? "Send" : ""}
+                value={!isLoading ? `${contactLang[lang].sendButton}` : ""}
             />
         </div>
     </form>
