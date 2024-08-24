@@ -16,7 +16,7 @@ export const UsignVar = ({lang} : Props) => {
     return (
         <>
             <p className="text-slate-400 mt-5 text-nowrap text-xl">
-                {`// ${contactLang[lang].firstComment}`}
+                {`// ${contactLang[lang].secondComment}`}
             </p>
             <p className="font-bold text-nowrap text-xl">
                 {isConsole ? (
