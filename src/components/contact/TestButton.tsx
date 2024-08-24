@@ -3,12 +3,13 @@
 import { Lang } from "@/interfaces";
 import { contactLang } from "@/lang";
 import { useContactStore } from "@/store/contact-store";
-import { useSearchParams } from "next/navigation";
 
-export const TestButton = () => {
+interface Props {
+    lang: Lang
+}
 
-    const params = useSearchParams();
-    const lang = params.get("lang") as Lang ?? "us";
+export const TestButton = ({lang}: Props) => {
+
 
     const increasteCount = useContactStore(state => state.increasteCount);
     return (

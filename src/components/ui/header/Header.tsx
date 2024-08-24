@@ -1,6 +1,6 @@
 import { MenuButton } from './MenuButton'
 import { HeaderLogo } from './HeaderLogo'
-import { HeaderNav } from './HeaderNav'
+import { HeaderNavSuspense } from './HeaderNav'
 
 export const Header = () => {
     
@@ -12,7 +12,7 @@ export const Header = () => {
                     fontSize="text-2xl"
                 />
 
-                <HeaderNav />
+                <HeaderNavSuspense />
 
                 <MenuButton />
             </div>

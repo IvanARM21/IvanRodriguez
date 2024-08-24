@@ -1,6 +1,6 @@
 "use client";
 
-import {  useEffect, useState } from "react";
+import {  Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
@@ -24,6 +24,13 @@ const initialValues = {
  }
 export const ProjectModal = () => {
 
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+      setLoaded(true);
+    }, [loaded]);
+  
+    
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
@@ -31,10 +38,10 @@ export const ProjectModal = () => {
     const params = new URLSearchParams(searchParams);
     const [isActive, setIsActive] = useState(false);
     const [project, setProject] = useState<ProjectFormatted>(initialValues);
-
+    
     const projectId = Number(params.get("viewProject")) || null;
     const lang = params.get("lang") as Lang ?? "us";
-
+    
     const closeModal = () => {
         setIsActive(false);
         document.body.style.overflow = 'auto';
@@ -51,9 +58,11 @@ export const ProjectModal = () => {
         setProject({ ...currentProject, technologies: formattProject(currentProject) });
         setIsActive(true);
     }, [projectId]);    
-
-  return (
-    <>
+    
+    if(loaded) return <></>
+    
+    return (
+        <>
         {isActive && 
             <div 
                 className={"fade-in fixed inset-0 bg-indigo-600 backdrop-blur-sm bg-opacity-10 z-30 transition-all duration-500 cursor-pointer"}
@@ -103,4 +112,12 @@ export const ProjectModal = () => {
         </div>
     </>
   )
+}
+
+export const ProjectModalSuspense = () => {
+    return (
+        <Suspense>
+            <ProjectModal />
+        </Suspense>
+    )
 }

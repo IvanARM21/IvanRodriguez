@@ -20,9 +20,9 @@ export const ContactSection = ({lang} : Props) => {
           <EmailInfo 
             lang={lang}
           />
-          <ContactForm />
+          <ContactForm lang={lang} />
         </div>
-        <PrintEmail />
+        <PrintEmail lang={lang} />
     </section>
   )
 }

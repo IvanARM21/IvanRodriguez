@@ -5,13 +5,15 @@ import { useSearchParams } from "next/navigation";
 import { Lang } from "@/interfaces";
 import { navItems } from "@/data"
 import { LangButton } from "./LangButton"
+import { Suspense } from 'react'
 
 
 export const HeaderNav = () => {
 
+  
   const params = useSearchParams();
   const lang = params.get("lang") as Lang ?? "us";
-
+  
   return (
     <nav className="gap-3 hidden md:flex items-center">
         {navItems.map(item => (
@@ -21,7 +23,15 @@ export const HeaderNav = () => {
                 className="text-indigo-600 font-bold hover:text-white hover:bg-indigo-600 px-4 py-2 rounded-lg hover:shadow-md hover:shadow-indigo-600 transition-all duration-500"
             >{item.label[lang]}</Link>
         ))}
-        <LangButton />
+        <LangButton lang={lang} />
     </nav>
+  )
+}
+
+export const HeaderNavSuspense = () => {
+  return (
+    <Suspense>
+      <HeaderNav />
+    </Suspense>
   )
 }

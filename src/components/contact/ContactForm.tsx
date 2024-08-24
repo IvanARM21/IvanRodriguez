@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import { Lang } from '@/interfaces';
 import { Alert } from '@/components';
@@ -8,14 +7,14 @@ import { isValidEmail } from "@/utils";
 import { contactLang } from '@/lang';
 import { useContactStore } from "@/store";
 
-export const ContactForm = () => {
+interface Props {
+    lang: Lang
+}
 
-  const params = useSearchParams();
-  const lang = params.get("lang") as Lang ?? "us";
-
-  const { formData, isHovered, onChange, onBlur, onSubmit, isSubmit, isLoading } = useContactStore();
+export const ContactForm = ({lang} : Props) => {
 
   const [isVisible, setIsVisible] = useState(false);
+  const { formData, isHovered, onChange, onBlur, onSubmit, isSubmit, isLoading } = useContactStore();
 
   useEffect(() => {
     const timer = setTimeout(() => {

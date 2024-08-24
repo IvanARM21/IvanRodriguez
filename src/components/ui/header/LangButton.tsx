@@ -1,24 +1,20 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation"
 import { HiChevronDown } from "react-icons/hi";
 import { languages } from "@/data"; 
 import { LangOptions } from "./LangOptions";
-import { existsLang } from "@/utils";
 import { Lang } from "@/interfaces";
 
 interface Props {
+  lang: Lang
   hiddenMenu?: () => void;
 }
 
-export const LangButton = ({hiddenMenu} : Props) => {
+export const LangButton = ({hiddenMenu, lang} : Props) => {
 
-  const params = useSearchParams();
   const [showOptions, setShowOptions] = useState(false);
 
-  let lang = params.get("lang") as Lang;
-  if(!existsLang(lang)) lang = "us";
   const { flag, label } = languages[lang];
 
   return (

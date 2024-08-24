@@ -1,5 +1,5 @@
-import { Footer, Header, MenuMobile } from "@/components";
-import { ProjectModal } from "@/components/ui/modal/ProjectModal";
+import { Footer, Header, MenuMobileSuspense } from "@/components";
+import {  ProjectModalSuspense } from "@/components/ui/modal/ProjectModal";
 
 export const metadata  = {
   title: '<IvanRodriguez/> | Layout',
@@ -16,8 +16,8 @@ export default async function AppLayout({
   return (
     <>
         <Header />
-        <MenuMobile />
-        <ProjectModal />
+        <MenuMobileSuspense />
+        <ProjectModalSuspense />
           <main className="flex-1 max-w-screen-xl mx-auto px-2 mt-10 w-full">
             {children}
           </main>

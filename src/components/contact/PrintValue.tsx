@@ -1,14 +1,15 @@
 "use client";
 
-import { Lang } from "@/interfaces";
-import { useContactStore } from "@/store/contact-store";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Lang } from "@/interfaces";
+import { useContactStore } from "@/store";
 
-export const PrintEmail = () => {
+interface Props {
+    lang: Lang
+}
 
-    const params = useSearchParams();
-    const lang = params.get("lang") as Lang ?? "us";
+export const PrintEmail = ({lang} : Props) => {
+
     const message = lang === "us" ? "Email of contact: " : "Email de contacto: ";
     const myEmail = "ivanrms371@gmail.com";
 

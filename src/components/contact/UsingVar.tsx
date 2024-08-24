@@ -3,20 +3,20 @@
 import { Lang } from "@/interfaces";
 import { contactLang } from "@/lang";
 import { useContactStore } from "@/store/contact-store";
-import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 
-export const UsignVar = () => {
+interface Props {
+    lang: Lang
+}
+export const UsignVar = ({lang} : Props) => {
 
-    const params = useSearchParams();
-    const lang = params.get("lang") as Lang ?? "us";
     const type = useContactStore(state => state.type);
     const isConsole = useMemo(() => type === "console", [type]);
         
     return (
         <>
             <p className="text-slate-400 mt-5 text-nowrap text-xl">
-                // {contactLang[lang].secondComment}
+                {`// ${contactLang[lang].firstComment}`}
             </p>
             <p className="font-bold text-nowrap text-xl">
                 {isConsole ? (
