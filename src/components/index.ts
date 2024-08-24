@@ -12,5 +12,6 @@ export * from './ui/footer/Footer';
 export * from './ui/header/Header';
 export * from './ui/menu-mobile/MenuMobile';
 export * from './ui/section/Section';
+export * from './ui/modal/ProjectModal';
 export * from './ui/social-networks/SocialNetworks';
 export * from './ui/technologies/TechnologiesGrid';

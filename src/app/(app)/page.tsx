@@ -5,7 +5,7 @@ import { existsLang } from "@/utils";
 import { redirect } from "next/navigation";
 
 export const metadata = {
- title: '<IvanRodriguez/> | Home',
+ title: '<IvanRodriguez/>',
 };
 
 
