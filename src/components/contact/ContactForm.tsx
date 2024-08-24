@@ -1,11 +1,10 @@
 "use client";
-import { useEffect, useState } from 'react';
 import clsx from 'clsx';
+import { useContactStore } from "@/store";
+import { isValidEmail, sendMail } from "@/utils";
 import { Lang } from '@/interfaces';
 import { Alert } from '@/components';
-import { isValidEmail } from "@/utils";
 import { contactLang } from '@/lang';
-import { useContactStore } from "@/store";
 
 interface Props {
     lang: Lang
@@ -13,30 +12,16 @@ interface Props {
 
 export const ContactForm = ({lang} : Props) => {
 
-  const [isVisible, setIsVisible] = useState(false);
-  const { formData, isHovered, onChange, onBlur, onSubmit, isSubmit, isLoading } = useContactStore();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-        setIsVisible(isSubmit);
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, [isSubmit]);
+  const { formData, isHovered, onChange, onBlur, onSubmit, isLoading, alert } = useContactStore();
 
   return (
-    <form onSubmit={onSubmit} className="bg-slate-900 px-6 py-8 rounded-2xl w-full min-[992px]:w-6/12">
-        {isVisible && (
+    <form onSubmit={e => onSubmit(e, lang, sendMail)} className="bg-slate-900 px-6 py-8 rounded-2xl w-full min-[992px]:w-6/12">
+        {alert.message && (
             <Alert 
-                isError={false}
-                message="The message has been sent correctly"
-                className={clsx(
-                    "justify-center mb-2 text-lg", {
-                        "show-message-sent": isSubmit,
-                        "hidden-message-sent": !isSubmit,
-                    }
-                )}
-            />
+                isError={alert.error}
+                message={alert.message}
+                className={"show-message-sent justify-center mb-2 text-lg"}
+            /> 
         )}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="flex flex-col gap-2 ">

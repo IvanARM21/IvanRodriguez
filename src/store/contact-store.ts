@@ -1,13 +1,24 @@
+import { Lang } from "@/interfaces";
+import { MailSend } from "@/interfaces/mail.interface";
+import { sendMail } from "@/utils/email";
 import { create } from "zustand";
 
 interface FormData {
-    [key : string]: string
+    [key: string]: string;
 }
 const initialValues : FormData = {
     name: "",
     email: "",
     subject: "",
     message: ""
+}
+interface Alert {
+    message: string;
+    error: boolean;
+}
+const initialAlert : Alert = {
+    message: "",
+    error: true
 }
 interface FormHovered {
     name: boolean;
@@ -28,9 +39,16 @@ interface ContactStore {
     isHovered: FormHovered
     onChange: (e : React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLTextAreaElement>) => void;
     onBlur: (e : React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLTextAreaElement>) => void;
-    onSubmit: (e : React.FormEvent<HTMLFormElement>) => void;
+    onSubmit: (e : React.FormEvent<HTMLFormElement>, lang : Lang, callback: (formData: MailSend) => Promise<{
+        error: boolean;
+        us: { message: string; };
+        es: {  message: string; } }>
+    ) => void;
     isSubmit: boolean;
     isLoading: boolean;
+
+    alert: Alert
+    
     // Animation
     count: number;
     type: "console" | "alert";
@@ -50,13 +68,15 @@ const useContactStore = create<ContactStore>((set, get) => ({
     isSubmit: false,
     isLoading: false,
 
+    alert: initialAlert,
+
     onChange: (e) => set((state) => ({ formData: 
         { ...state.formData, [e.currentTarget.id]: e.currentTarget.value }
     })),
     onBlur: (e) => set((state) => ({ isHovered:
         { ...state.isHovered, [e.currentTarget.id]: true}
     })),
-    onSubmit: (e) => {
+    onSubmit: async (e, lang) => {
         e.preventDefault();
         const keys = Object.keys(get().formData);
         keys.forEach(key => {
@@ -70,17 +90,26 @@ const useContactStore = create<ContactStore>((set, get) => ({
             })));
             return;
         }
-        set({isLoading: true});
-        setTimeout(() => {
-            set({isLoading: false});
+        const { name, email, subject, message } = get().formData;
+        const mailData: MailSend = {
+            name: name,
+            email: email,
+            subject: subject,
+            message: message,
+        };
+        set({isLoading: true, isSubmit: true});
+        const result = await sendMail(mailData);
+        set({
+            isLoading: false, 
+            isSubmit: false, 
+            alert: {
+                message: result[lang].message, 
+                error: result.error
+            }});
 
-            set({ isSubmit: true, formData: initialValues, isHovered: initialValuesHovered });        
-
-            setTimeout(() => {
-                set({isSubmit: false});
-            }, 3000);
-        }, 5000);
-        
+        if(!result.error) {
+            set({ formData: initialValues, isHovered: initialValuesHovered });
+        }
     },
 
     increasteCount: () => set((state) => ({count: state.count+1})),
