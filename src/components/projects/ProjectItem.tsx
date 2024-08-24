@@ -27,7 +27,8 @@ export const ProjectItem = ({project, lang} : Props) => {
                 alt="Ensemble"
                 height={300}
                 width={300}
-                quality={60}
+                sizes="(min-width: 480px) 45vw, (min-width: 1280px) 400px, 95vw"
+                quality={70}
                 className="w-full hover:scale-125 transition-all duration-500 cursor-pointer"
             />
         </a>

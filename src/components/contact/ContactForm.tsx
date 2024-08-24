@@ -78,7 +78,7 @@ export const ContactForm = ({lang} : Props) => {
                 /> }
                 { !isValidEmail(formData.email) && formData.email.length > 0 && <Alert 
                         isError={true}
-                        message="The email is invalid"
+                        message={contactLang[lang].noValidEmail}
                 /> }
             </div>
         </div>

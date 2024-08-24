@@ -11,6 +11,7 @@ export const MenuButton = () => {
         type="button"
         onClick={showMenu}
         className="h-7 w-7 text-slate-100 cursor-pointer block md:hidden"
+        aria-label="Menú Button"
     >
         <FaBars 
             size={30}

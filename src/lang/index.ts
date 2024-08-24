@@ -51,6 +51,7 @@ export const contactLang = {
         emailLabel: "Email",
         emailPlaceholder: "Tú Email",
         emailAlert: "El email no puede ir vacio",
+        noValidEmail: "Email no válido",
 
         subjectLabel: "Asunto",
         subjectPlaceholder: "El Asunto",
@@ -84,6 +85,7 @@ export const contactLang = {
         emailLabel: "Email",
         emailPlaceholder: "Your Email",
         emailAlert: "The email cannot be empty",
+        noValidEmail: "Email not valid",
 
         subjectLabel: "Subject",
         subjectPlaceholder: "The Subject",

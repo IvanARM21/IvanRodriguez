@@ -42,7 +42,7 @@ export const MenuMobile = () => {
           className="ml-auto mt-5 h-10 w-10 text-white cursor-pointer" 
         />
 
-        <div className="flex-1 mt-5">
+        <div className="flex-1">
           {navItems.map(item => (
             <Link
               key={item.url}

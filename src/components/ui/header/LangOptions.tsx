@@ -32,7 +32,7 @@ export const LangOptions = ({flag, setShowOptions, hiddenMenu} : Props) => {
                     key={language.flag} 
                     onClick={hiddenMenu && hiddenMenu}
                     scroll={false}
-                    className={`flex items-center ${flag === language.flag ? " hidden" : "py-2"}`}
+                    className={`flex items-center text-xl ${flag === language.flag ? " hidden" : "py-2"}`}
                 >
                     <Image 
                         src={language.flag}
