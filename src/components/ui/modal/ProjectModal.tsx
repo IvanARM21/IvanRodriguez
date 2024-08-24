@@ -24,13 +24,6 @@ const initialValues = {
  }
 export const ProjectModal = () => {
 
-    const [loaded, setLoaded] = useState(false);
-
-    useEffect(() => {
-      setLoaded(true);
-    }, [loaded]);
-  
-    
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
@@ -58,8 +51,6 @@ export const ProjectModal = () => {
         setProject({ ...currentProject, technologies: formattProject(currentProject) });
         setIsActive(true);
     }, [projectId]);    
-    
-    if(loaded) return <></>
     
     return (
         <>
