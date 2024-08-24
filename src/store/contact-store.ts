@@ -15,10 +15,12 @@ const initialValues : FormData = {
 interface Alert {
     message: string;
     error: boolean;
+    show: boolean;
 }
 const initialAlert : Alert = {
     message: "",
-    error: true
+    error: true,
+    show: false
 }
 interface FormHovered {
     name: boolean;
@@ -99,14 +101,21 @@ const useContactStore = create<ContactStore>((set, get) => ({
         };
         set({isLoading: true, isSubmit: true});
         const result = await sendMail(mailData);
+        const alertUi = { 
+            message: result[lang].message,
+            error: result.error
+         };
         set({
             isLoading: false, 
             isSubmit: false, 
             alert: {
-                message: result[lang].message, 
-                error: result.error
-            }});
+                ...alertUi,
+                show: true,
+        }});
 
+        setTimeout(() => {
+            set({alert: { ...alertUi, show: false }});
+        }, 5000);
         if(!result.error) {
             set({ formData: initialValues, isHovered: initialValuesHovered });
         }

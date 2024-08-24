@@ -20,7 +20,10 @@ export const ContactForm = ({lang} : Props) => {
             <Alert 
                 isError={alert.error}
                 message={alert.message}
-                className={"show-message-sent justify-center mb-2 text-lg"}
+                className={clsx("show-message-sent justify-center mb-2 text-lg", {
+                    "show-message-sent": alert.show,
+                    "hidden-message-sent": !alert.show
+                })}
             /> 
         )}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
