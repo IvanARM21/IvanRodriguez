@@ -11,11 +11,11 @@ interface Props {
   lang: Lang;
 }
 
-export const ContactSection = ({lang} : Props) => {
+export const ContactSection = ({lang = "us"} : Props) => {
   
   return (
     <section className="fade-in my-20 " id="contact">
-        <TitleSection title={contactLang[lang].contactTag ?? contactLang["us"].contactTag} />
+        <TitleSection title={contactLang[lang]?.contactTag ?? contactLang["us"].contactTag} />
         <div className="flex flex-col-reverse gap-5  min-[992px]:flex-row justify-between">
           <EmailInfo 
             lang={lang}

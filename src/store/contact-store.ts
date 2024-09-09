@@ -1,7 +1,7 @@
+import { create } from "zustand";
 import { Lang } from "@/interfaces";
 import { MailSend } from "@/interfaces/mail.interface";
 import { sendMail } from "@/utils/email";
-import { create } from "zustand";
 
 interface FormData {
     [key: string]: string;

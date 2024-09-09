@@ -9,14 +9,12 @@ interface Props {
 }
 
 export const TestButton = ({lang}: Props) => {
-
-
     const increasteCount = useContactStore(state => state.increasteCount);
     return (
         <button
             type="button"
             className=" btn-secondary py-2 px-4"
             onClick={increasteCount}
-        >{contactLang[lang].buttonTest}</button>
+        >{contactLang[lang]?.buttonTest ?? contactLang["us"].buttonTest}</button>
     )
 }

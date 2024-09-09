@@ -2,7 +2,7 @@
 
 import { Lang } from "@/interfaces";
 import { projectsLang } from "@/lang";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 interface Props {
   id: number | null;
@@ -11,11 +11,18 @@ interface Props {
 
 export const ButtonViewDetails = ({id, lang} : Props) => {
 
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
   const pathname = usePathname();
   const router = useRouter();
 
   const openModal = () => {
-    router.replace(`${pathname}?lang=${lang ?? "us"}&viewProject=${id}`, {
+
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+    if(lang) newSearchParams.set("lang", lang);
+    if(id) newSearchParams.set("viewProject", id.toString());
+    
+    router.replace(`${pathname}?${newSearchParams}`, {
       scroll: false
     });
   }
@@ -25,6 +32,6 @@ export const ButtonViewDetails = ({id, lang} : Props) => {
         type="button"
         onClick={openModal} 
         className="btn-primary w-full p-3 my-5"
-    >{projectsLang[lang].projectButton ?? projectsLang["us"].projectButton}</button>
+    >{projectsLang[lang]?.projectButton ?? projectsLang["us"].projectButton}</button>
   )
 }

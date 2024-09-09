@@ -10,7 +10,7 @@ interface Props {
     lang: Lang
 }
 
-export const ContactForm = ({lang} : Props) => {
+export const ContactForm = ({lang = "us"} : Props) => {
 
   const { formData, isHovered, onChange, onBlur, onSubmit, isLoading, alert } = useContactStore();
 
@@ -31,11 +31,11 @@ export const ContactForm = ({lang} : Props) => {
                 <label 
                     htmlFor="name" 
                     className="text-xl"
-                >{contactLang[lang].nameLabel}</label>
+                >{contactLang[lang]?.nameLabel}</label>
                 <input 
                     type="text" 
                     id="name"
-                    placeholder={contactLang[lang].namePlaceholder}
+                    placeholder={contactLang[lang]?.namePlaceholder}
                     className="bg-slate-800 p-3 rounded-xl"
                     onChange={onChange}
                     onBlur={onBlur}
@@ -43,18 +43,18 @@ export const ContactForm = ({lang} : Props) => {
                 />
                 { isHovered.name && formData.name === "" && <Alert 
                         isError={true}
-                        message={contactLang[lang].nameAlert}
+                        message={contactLang[lang]?.nameAlert}
                 /> }
             </div>
             <div className="flex flex-col gap-2 ">
                 <label 
                     htmlFor="email" 
                     className="text-xl"
-                >{contactLang[lang].emailLabel}</label>
+                >{contactLang[lang]?.emailLabel}</label>
                 <input 
                     type="text" 
                     id="email"
-                    placeholder={contactLang[lang].emailPlaceholder}
+                    placeholder={contactLang[lang]?.emailPlaceholder}
                     className="bg-slate-800 p-3 rounded-xl"
                     onChange={onChange}
                     onBlur={onBlur}
@@ -62,11 +62,11 @@ export const ContactForm = ({lang} : Props) => {
                 />
                 { isHovered.email && formData.email === "" && <Alert 
                         isError={true}
-                        message={contactLang[lang].emailAlert}
+                        message={contactLang[lang]?.emailAlert}
                 /> }
                 { !isValidEmail(formData.email) && formData.email.length > 0 && <Alert 
                         isError={true}
-                        message={contactLang[lang].noValidEmail}
+                        message={contactLang[lang]?.noValidEmail}
                 /> }
             </div>
         </div>
@@ -74,11 +74,11 @@ export const ContactForm = ({lang} : Props) => {
             <label 
                 htmlFor="subject" 
                 className="text-xl"
-            >{contactLang[lang].subjectLabel}</label>
+            >{contactLang[lang]?.subjectLabel}</label>
             <input 
                 type="text" 
                 id="subject"
-                placeholder={contactLang[lang].subjectPlaceholder}
+                placeholder={contactLang[lang]?.subjectPlaceholder}
                 className="bg-slate-800 p-3 rounded-xl"
                 onChange={onChange}
                 onBlur={onBlur}
@@ -87,7 +87,7 @@ export const ContactForm = ({lang} : Props) => {
             {
                 isHovered.subject && formData.subject === "" && <Alert 
                     isError={true}
-                    message={contactLang[lang].subjectAlert}
+                    message={contactLang[lang]?.subjectAlert}
                 />
             }
         </div>
@@ -97,12 +97,12 @@ export const ContactForm = ({lang} : Props) => {
                 htmlFor="message" 
                 className="text-xl"
             >
-                {contactLang[lang].messageLabel}
+                {contactLang[lang]?.messageLabel}
             </label>
             <textarea 
                 name="message" 
                 id="message"
-                placeholder={contactLang[lang].messagePlaceholder}
+                placeholder={contactLang[lang]?.messagePlaceholder}
                 rows={3}
                 className="bg-slate-800 p-3 rounded-xl resize-none"
                 onChange={onChange}
@@ -111,7 +111,7 @@ export const ContactForm = ({lang} : Props) => {
             ></textarea>
             { isHovered.message && formData.message === "" && <Alert 
                     isError={true}
-                    message={contactLang[lang].messageAlert}
+                    message={contactLang[lang]?.messageAlert}
              /> }
         </div>
 
@@ -128,7 +128,7 @@ export const ContactForm = ({lang} : Props) => {
                 type="submit"
                 className="btn-primary px-4 py-3 cursor-pointer w-full"
                 disabled={isLoading}
-                value={!isLoading ? `${contactLang[lang].sendButton}` : ""}
+                value={!isLoading ? `${contactLang[lang]?.sendButton}` : ""}
             />
         </div>
     </form>

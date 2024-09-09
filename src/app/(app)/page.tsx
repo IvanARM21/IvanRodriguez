@@ -1,8 +1,6 @@
 import { ContactSection, Section, TechnologiesGrid, AboutMeSection, ProjectGrid } from "@/components";
 import { Lang } from "@/interfaces";
 import { projectsLang, stackLang } from "@/lang";
-import { existsLang } from "@/utils";
-import { redirect } from "next/navigation";
 
 export const metadata = {
  title: '<IvanRodriguez/>',
@@ -17,7 +15,6 @@ interface Props {
 
 export default function Home({searchParams} : Props) {
   
-  if(!existsLang(searchParams.lang)) redirect("/?lang=us");
   const lang = searchParams.lang as Lang;
 
   return (
@@ -28,7 +25,8 @@ export default function Home({searchParams} : Props) {
       
       <Section
         id="projects"
-        title={projectsLang[lang].projectsTag ?? projectsLang["us"].projectsTag}
+        title={projectsLang[lang]?.projectsTag ?? projectsLang["us"]?.projectsTag}
+        
       >
         <ProjectGrid 
           lang={lang}
@@ -37,7 +35,7 @@ export default function Home({searchParams} : Props) {
 
       <Section
         id="stack"
-        title={stackLang[lang].stackTag ?? stackLang["us"].stackTag}
+        title={stackLang[lang]?.stackTag ?? stackLang["us"]?.stackTag}
       >
         <TechnologiesGrid />
       </Section>

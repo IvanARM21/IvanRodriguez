@@ -13,15 +13,15 @@ export const AboutMeText = ({lang} : Props) => {
               className="text-2xl text-center sm:text-left font-black mb-10 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600 mr-2"
             >
               <span className="text-gray-300">{'<'}</span>
-                {aboutMeLang[lang].AboutMeTag ?? aboutMeLang["us"].AboutMeTag}
+                {aboutMeLang[lang]?.AboutMeTag ?? aboutMeLang["us"]?.AboutMeTag}
               <span className="text-gray-300">{'>'}</span>
             </span>
-              {aboutMeLang[lang].AboutMeText ?? aboutMeLang["us"].AboutMeTag}
+              {aboutMeLang[lang]?.AboutMeText ?? aboutMeLang["us"]?.AboutMeTag}
             <span 
               className="ml-2 text-2xl text-center sm:text-left font-black mb-10 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600"
             >
               <span className="text-gray-300">{'</'}</span>
-                {aboutMeLang[lang].AboutMeTag ?? aboutMeLang["us"].AboutMeTag}
+                {aboutMeLang[lang]?.AboutMeTag ?? aboutMeLang["us"]?.AboutMeTag}
               <span className="text-gray-300">{'>'}</span>
             </span>
         </p>
