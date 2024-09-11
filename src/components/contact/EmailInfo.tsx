@@ -12,7 +12,7 @@ interface Props {
 export const EmailInfo = ({lang} : Props) => {
   return (
     <div className="flex flex-col justify-between gap-8 w-full min-[992px]:w-6/12">
-      <div className="bg-slate-900 rounded-2xl px-4 py-4 sm:py-6 overflow-auto scrollbar">
+      <div className="  rounded-2xl  overflow-auto scrollbar">
         <ChangeTypeButton lang={lang}/>
         <p className="text-slate-400 text-nowrap text-xl">{`// ${contactLang[lang]?.firstComment}`}</p>
         <p className="text-indigo-500 font-bold text-xl text-nowrap">

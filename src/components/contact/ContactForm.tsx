@@ -15,7 +15,7 @@ export const ContactForm = ({lang = "us"} : Props) => {
   const { formData, isHovered, onChange, onBlur, onSubmit, isLoading, alert } = useContactStore();
 
   return (
-    <form onSubmit={e => onSubmit(e, lang, sendMail)} className="bg-slate-900 px-6 py-8 rounded-2xl w-full min-[992px]:w-6/12">
+    <form onSubmit={e => onSubmit(e, lang, sendMail)} className=" bg-slate-900 bg-opacity-70 px-6 py-8 rounded-2xl w-full min-[992px]:w-6/12">
         {alert.message && (
             <Alert 
                 isError={alert.error}

@@ -15,7 +15,7 @@ export const ProjectItem = ({project, lang} : Props) => {
   const projectTechnologies = formattProject(project);
 
   return (
-    <article className="flex flex-col overflow-hidden bg-slate-900 bg-opacity-30  p-3 rounded-lg">
+    <article className="flex flex-col overflow-hidden bg-slate-900 bg-opacity-70 p-3 rounded-lg">
         <div className="overflow-hidden rounded">
         <a
             aria-label={"Link to Project " + project.title}

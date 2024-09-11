@@ -23,15 +23,3 @@ export const TechnologiesGrid = () => {
     </div>
   )
 }
-
-
-/*<div className="grid gap-6 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {technologies.map(tecnology => (
-            <TechnologieItem 
-              key={tecnology.id} 
-              name={tecnology.name} 
-              color={tecnology.color}
-              icon={tecnology.icon}
-            />
-        ))}
-    </div> */

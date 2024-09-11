@@ -6,8 +6,10 @@ export const aboutMeLang = {
 
         buttonCv: "Descargar CV",
 
-        AboutMeTag: "SobreMi",
-        AboutMeText: "Soy Iván un Desarrollador Web con FullStack pero especializado en Frontend, me gusta crear sitios web con diseños modernos, eficientes y accesibles para los usuarios."
+        AboutMeTag: "SobreMí",
+        AboutMeTextOne: "Soy Iván un Desarrollador Web FullStack, ",
+        HighlightedText: "me especializo en frontend, ",
+        AboutMeTextTwo: "y disfruto crear sitios web con diseños modernos, eficientes y accesibles para los usuarios."
     },
     us: {
         presentationPartOne: "Hi! I'm Iván,",
@@ -16,7 +18,10 @@ export const aboutMeLang = {
         buttonCv: "Download CV",
 
         AboutMeTag: "AboutMe",
-        AboutMeText: "I'm Ivan Web Developer with FullStack but I specialize in Frontend, I like to create websites with modern, efficient and accessible designs for users."
+        AboutMeTextOne: "I'm Iván, a FullStack Web Developer, ",
+        HighlightedText: "I specialize in frontend, ",
+        AboutMeTextTwo: "and I enjoy creating websites with modern, efficient, and accessible designs for users."
+
     }
 }
 export const projectsLang = {

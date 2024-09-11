@@ -16,7 +16,13 @@ export const AboutMeText = ({lang} : Props) => {
                 {aboutMeLang[lang]?.AboutMeTag ?? aboutMeLang["us"]?.AboutMeTag}
               <span className="text-gray-300">{'>'}</span>
             </span>
-              {aboutMeLang[lang]?.AboutMeText ?? aboutMeLang["us"]?.AboutMeTag}
+            <span className="font-medium">
+              {aboutMeLang[lang]?.AboutMeTextOne ?? aboutMeLang["us"]?.AboutMeTextOne}
+              <span className=" italic text-indigo-600">
+                {aboutMeLang[lang]?.HighlightedText ?? aboutMeLang["us"]?.HighlightedText}
+              </span>
+              {aboutMeLang[lang]?.AboutMeTextTwo ?? aboutMeLang["us"]?.AboutMeTextTwo}
+            </span>
             <span 
               className="ml-2 text-2xl text-center sm:text-left font-black mb-10 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600"
             >
