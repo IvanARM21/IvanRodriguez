@@ -20,7 +20,7 @@ export const HeaderNav = () => {
             <Link 
                 key={item.url}
                 href={item.url}
-                className="text-indigo-600 font-medium text-xl hover:text-white hover:bg-indigo-600 px-4 py-2 rounded-lg hover:shadow-md hover:shadow-indigo-600 transition-all duration-500"
+                className="text-indigo-600 font-bold text-xl hover:text-white hover:bg-indigo-600 px-4 py-2 rounded-lg hover:shadow-md hover:shadow-indigo-600 transition-all duration-500"
             >{item.label[lang]}</Link>
         ))}
         <LangButton lang={lang} />
