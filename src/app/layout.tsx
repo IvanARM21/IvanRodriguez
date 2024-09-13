@@ -1,7 +1,7 @@
-import { Outfit } from "next/font/google";
+import { Rubik } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({ subsets: ["latin"], weight: ["400", "700", "900"] });
+const outfit = Rubik({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
 export default async function RootLayout({
   children,
